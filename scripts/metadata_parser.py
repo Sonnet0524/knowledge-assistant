@@ -58,9 +58,7 @@ class MetadataParser:
 
     def __init__(self) -> None:
         """Initialize the MetadataParser."""
-        self._frontmatter_pattern = re.compile(
-            r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL
-        )
+        self._frontmatter_pattern = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 
     def parse(self, content: str) -> Tuple[Dict[str, Any], str]:
         """
@@ -103,7 +101,7 @@ class MetadataParser:
             return {}, content
 
         frontmatter_text = match.group(1)
-        body = content[match.end():]
+        body = content[match.end() :]
 
         try:
             metadata = yaml.safe_load(frontmatter_text)

@@ -23,7 +23,7 @@ def sample_metadata() -> Dict[str, Any]:
         "date": "2026-03-05",
         "type": "daily",
         "tags": ["test", "example"],
-        "author": "Test Agent"
+        "author": "Test Agent",
     }
 
 
@@ -79,13 +79,15 @@ title: Missing Date Document
 def create_test_document(directory: Path, filename: str, content: str) -> Path:
     """创建测试文档"""
     filepath = directory / filename
-    filepath.write_text(content, encoding='utf-8')
+    filepath.write_text(content, encoding="utf-8")
     return filepath
 
 
 @pytest.fixture
 def test_document_factory(tmp_project_dir: Path):
     """测试文档工厂fixture"""
+
     def _create(filename: str, content: str) -> Path:
         return create_test_document(tmp_project_dir / "documents", filename, content)
+
     return _create

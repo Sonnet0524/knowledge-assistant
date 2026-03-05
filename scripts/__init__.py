@@ -7,4 +7,4 @@ template processing, and utility functions.
 
 from .types import DocumentMetadata
 
-__all__ = ['DocumentMetadata']
+__all__ = ["DocumentMetadata"]
