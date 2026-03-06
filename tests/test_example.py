@@ -1,8 +1,5 @@
 """Example test to verify test framework setup."""
 
-import pytest
-from pathlib import Path
-
 
 def test_pytest_works():
     """Verify pytest is properly configured."""

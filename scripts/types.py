@@ -19,7 +19,7 @@ Example:
 
 from dataclasses import dataclass
 from typing import List, Optional
-from datetime import date
+from datetime import date  # noqa: F401 - Used in type annotations
 
 
 @dataclass
