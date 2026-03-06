@@ -8,7 +8,6 @@ This module tests the integration between different components:
 """
 
 import pytest
-from pathlib import Path
 from datetime import date
 
 

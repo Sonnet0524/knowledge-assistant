@@ -3,7 +3,6 @@
 import pytest
 from pathlib import Path
 from typing import Dict, Any, Callable, Optional, List
-from datetime import date
 
 
 def pytest_configure(config):
@@ -186,7 +185,7 @@ author: "Author Name (with parentheses)"
 ## Empty Section
 
 
-## Very Long Line
+## Very Long Line  # noqa: E501
 This is a very long line that tests how the parser handles extremely long lines without any breaks or formatting which could potentially cause issues with line-based parsing algorithms or buffer overflows in older systems but should be handled gracefully by modern parsers.
 
 ## Special Characters
