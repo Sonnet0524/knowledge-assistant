@@ -80,12 +80,11 @@ def scan_directory(
     parser = MetadataParser()
 
     # Collect files
+    files: List[Path] = []
     if recursive:
-        files = []
         for ext in extensions:
             files.extend(dir_path.rglob(f"*{ext}"))
     else:
-        files = []
         for ext in extensions:
             files.extend(dir_path.glob(f"*{ext}"))
 
