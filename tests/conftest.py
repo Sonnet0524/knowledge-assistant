@@ -8,12 +8,8 @@ from datetime import date
 
 def pytest_configure(config):
     """Configure custom markers for pytest."""
-    config.addinivalue_line(
-        "markers", "integration: mark test as integration test"
-    )
-    config.addinivalue_line(
-        "markers", "slow: mark test as slow running test"
-    )
+    config.addinivalue_line("markers", "integration: mark test as integration test")
+    config.addinivalue_line("markers", "slow: mark test as slow running test")
 
 
 @pytest.fixture
@@ -106,10 +102,12 @@ def test_document_factory(tmp_project_dir: Path):
 
 # ==================== Integration Test Fixtures ====================
 
+
 @pytest.fixture
 def metadata_parser():
     """创建MetadataParser实例"""
     from scripts.metadata_parser import MetadataParser
+
     return MetadataParser()
 
 
@@ -220,7 +218,7 @@ def template_directory(tmp_project_dir: Path) -> Path:
     """创建模板目录"""
     templates = tmp_project_dir / "templates"
     templates.mkdir(exist_ok=True)
-    
+
     # 创建示例模板
     (templates / "daily-note.md").write_text("""---
 title: Daily Note Template
@@ -237,7 +235,7 @@ type: daily
 ## Notes
 {content}
 """)
-    
+
     (templates / "research-note.md").write_text("""---
 title: Research Note Template
 date: {date}
@@ -257,20 +255,21 @@ tags:
 ## References
 {references}
 """)
-    
+
     return templates
 
 
 @pytest.fixture
 def document_factory() -> Callable:
     """文档工厂fixture，用于创建各种类型的测试文档"""
+
     def _create_document(
         title: str = "Test Document",
         date_str: str = "2026-03-05",
         doc_type: str = "test",
         tags: Optional[List[str]] = None,
         author: str = "Test Agent",
-        body: str = "Test content"
+        body: str = "Test content",
     ) -> str:
         """创建自定义测试文档"""
         tags_list = tags if tags is not None else []
@@ -287,6 +286,7 @@ author: {author}
 
 {body}
 """
+
     return _create_document
 
 
@@ -295,16 +295,16 @@ def integration_test_data(tmp_project_dir: Path) -> Dict[str, Path]:
     """集成测试数据集"""
     data_dir = tmp_project_dir / "test_documents"
     data_dir.mkdir(exist_ok=True)
-    
+
     # 创建各种测试文档
     documents = {
         "valid": data_dir / "valid_doc.md",
         "invalid_yaml": data_dir / "invalid_yaml.md",
         "missing_fields": data_dir / "missing_fields.md",
         "multi_language": data_dir / "multi_language.md",
-        "performance": data_dir / "performance.md"
+        "performance": data_dir / "performance.md",
     }
-    
+
     # 写入文档内容
     documents["valid"].write_text("""---
 title: Valid Document
@@ -314,7 +314,7 @@ type: test
 
 Content here.
 """)
-    
+
     documents["invalid_yaml"].write_text("""---
 title: Invalid
 invalid: [unclosed
@@ -322,14 +322,14 @@ invalid: [unclosed
 
 Content.
 """)
-    
+
     documents["missing_fields"].write_text("""---
 title: Missing Fields
 ---
 
 No date field.
 """)
-    
+
     documents["multi_language"].write_text("""---
 title: 多语言测试
 date: 2026-03-05
@@ -337,12 +337,12 @@ date: 2026-03-05
 
 中文内容测试。
 """)
-    
+
     documents["performance"].write_text("""---
 title: Performance Test
 date: 2026-03-05
 ---
 
 """ + "\n".join([f"Line {i}" for i in range(1000)]))
-    
+
     return documents
