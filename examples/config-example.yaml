@@ -1,0 +1,99 @@
+# Knowledge Assistant Configuration Example
+# Copy this file to 'config.yaml' and customize as needed
+
+# Template Configuration
+template_dir: ./templates
+output_dir: ./output
+
+# Default Values
+default_author: Knowledge Assistant
+date_format: "%Y-%m-%d"
+
+# Template-Specific Settings
+templates:
+  daily-note:
+    enabled: true
+    auto_date: true
+    default_tags:
+      - daily
+      - journal
+  
+  research-note:
+    enabled: true
+    default_tags:
+      - research
+      - notes
+  
+  meeting-minutes:
+    enabled: true
+    default_tags:
+      - meeting
+      - work
+  
+  task-list:
+    enabled: true
+    default_tags:
+      - tasks
+      - productivity
+  
+  knowledge-card:
+    enabled: true
+    default_tags:
+      - knowledge
+      - learning
+
+# Editor Settings
+editor:
+  default: vscode
+  line_length: 100
+
+# File Naming Convention
+naming:
+  include_date: true
+  date_prefix: true
+  format: "{date}_{title}"
+
+# Organization Settings
+organization:
+  # Default strategy for organizing notes
+  default_strategy: date
+  
+  # Date format for directories
+  date_directory_format: "{year}/{month}"
+  
+  # Whether to create index files automatically
+  auto_index: true
+  
+  # Tag separator for multi-tag files
+  tag_separator: "-"
+
+# Processing Settings
+processing:
+  # Batch size for processing multiple files
+  batch_size: 100
+  
+  # Whether to preserve file timestamps
+  preserve_timestamps: true
+  
+  # Maximum filename length
+  max_filename_length: 255
+
+# Logging Settings
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: logs/knowledge-assistant.log
+
+# Advanced Settings
+advanced:
+  # Cache template files for better performance
+  cache_templates: true
+  
+  # Validate metadata before saving
+  validate_metadata: true
+  
+  # Create backups before overwriting
+  create_backups: false
+  
+  # Backup directory
+  backup_dir: .backups
