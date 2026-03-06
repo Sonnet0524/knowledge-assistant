@@ -13,7 +13,6 @@ Example:
     >>> print(f"Index created at: {index_path}")
 """
 
-import os
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path

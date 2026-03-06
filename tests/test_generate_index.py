@@ -8,7 +8,6 @@ Tests the generate_index module including:
 - Index generation with different options
 """
 
-import os
 import tempfile
 import pytest
 from pathlib import Path
