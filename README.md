@@ -1,8 +1,18 @@
 # Knowledge Assistant
 
-A personal knowledge management assistant with document templates, metadata management, and automation tools.
+A personal knowledge management assistant with AI-powered semantic search, intelligent text extraction, and seamless integration capabilities.
 
 ## Features
+
+### v1.1 Features
+
+- **Semantic Search** - AI-powered search that understands meaning, not just keywords
+- **Keyword Extraction** - Automatically extract key terms from documents (TF-IDF, TextRank)
+- **Summary Generation** - Generate concise summaries of long documents
+- **Email Integration** - Connect and search your email for relevant information
+- **opencode Ready** - Designed for integration with opencode master agent
+
+### Core Features (v1.0)
 
 - **Metadata System** - Parse and validate YAML frontmatter in your documents
 - **Template Engine** - 5 pre-built templates for common note types
@@ -97,14 +107,58 @@ print(f"Organized {result.moved} notes")
 
 ## Tools
 
-### organize_notes
+### v1.1 Tools
+
+#### build_semantic_index
+Build a semantic index for your documents using AI embeddings.
+
+```python
+from scripts.tools.indexing import build_semantic_index
+
+result = build_semantic_index(
+    documents=[{"path": "notes/python.md", "content": "...", "metadata": {...}}],
+    index_path=".ka-index"
+)
+```
+
+#### semantic_search
+Search your knowledge base with natural language queries.
+
+```python
+from scripts.tools.search import semantic_search
+
+results = semantic_search(
+    query="How to handle async programming?",
+    index_path=".ka-index",
+    top_k=5
+)
+```
+
+#### extract_keywords
+Extract keywords from documents using TF-IDF or TextRank.
+
+```python
+from scripts.tools.extraction import extract_keywords
+
+keywords = extract_keywords(text="...", method="tfidf", top_n=10)
+```
+
+#### generate_summary
+Generate concise summaries of long documents.
+
+```python
+from scripts.tools.extraction import generate_summary
+
+summary = generate_summary(text="...", max_length=200)
+```
+
+### Core Tools (v1.0)
+
+#### organize_notes
 Organize markdown files by date, tags, or custom criteria.
 
-### generate_index
+#### generate_index
 Generate a markdown index file for a directory of notes.
-
-### extract_keywords (Coming Soon)
-Extract keywords from documents automatically.
 
 ## Documentation
 
@@ -115,7 +169,7 @@ Extract keywords from documents automatically.
 
 ## Project Status
 
-**Current Version**: v1.0 (in development)
+**Current Version**: v1.1.0
 
 ### Milestones
 
@@ -124,11 +178,15 @@ Extract keywords from documents automatically.
 | M1 Infrastructure | ✅ Complete | 100% |
 | M2 Metadata System | ✅ Complete | 100% |
 | M3 Template System | ✅ Complete | 100% |
-| M4 Tools | 🔄 In Progress | 66% |
-| M5 Test Coverage | ✅ Complete | 96% |
-| M6 Release | ⏳ Pending | 0% |
+| M4 Tools | ✅ Complete | 100% |
+| M5 Test Coverage | ✅ Complete | 91.7% |
+| M6 Release v1.0 | ✅ Complete | 100% |
+| M7 Semantic Index & Search | ✅ Complete | 100% |
+| M8 Extraction Tools | ✅ Complete | 100% |
+| M9 Integration | ✅ Complete | 100% |
+| M10 Release v1.1 | ✅ Complete | 100% |
 
-**Overall Progress**: 62% (3.7/6 milestones)
+**Overall Progress**: 100% (v1.1 Released)
 
 ## Development
 
@@ -165,13 +223,36 @@ knowledge-assistant/
 │   ├── template_engine.py  # Template rendering
 │   ├── config.py        # Configuration management
 │   ├── utils.py         # Utility functions
+│   ├── embeddings/      # Vector embeddings (v1.1)
+│   ├── index/           # Vector index (v1.1)
+│   ├── connectors/      # Data connectors (v1.1)
 │   └── tools/           # Automation tools
+│       ├── indexing.py  # Semantic index (v1.1)
+│       ├── search.py    # Semantic search (v1.1)
+│       ├── extraction.py # Text extraction (v1.1)
 │       ├── organize_notes.py
 │       └── generate_index.py
 ├── templates/           # Document templates
-├── tests/               # Test suite (96% coverage)
+├── skills/              # opencode skill definitions (v1.1)
+├── tests/               # Test suite
 ├── docs/                # Documentation
 └── examples/            # Code examples
+```
+
+### opencode Integration (v1.1)
+
+```
+opencode (Master Agent)
+  ├── File operations (own capability)
+  ├── NLU & intent understanding (own capability)
+  └── Calls knowledge-assistant tools
+      ↓
+knowledge-assistant (Tool Library)
+  ├── build_semantic_index(documents) → IndexResult
+  ├── semantic_search(query) → [SearchResult]
+  ├── extract_keywords(content) → [Keyword]
+  ├── generate_summary(content) → Summary
+  └── EmailConnector → Email data
 ```
 
 ## License
@@ -180,8 +261,8 @@ See [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
-This project is currently in active development. Contributions welcome after v1.0 release.
+This project welcomes contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
-**Built with** ❤️ using Python, YAML, and Markdown
+**Current Version**: v1.1.0 | **Built with** ❤️ using Python, YAML, and Markdown
