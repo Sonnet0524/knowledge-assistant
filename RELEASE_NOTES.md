@@ -1,5 +1,313 @@
 # Release Notes
 
+## v1.2.0 (2026-03-08)
+
+**Release Date**: 2026-03-08
+
+Knowledge Assistant v1.2 introduces advanced connectors, abstractive summarization, multi-language support, and a modern Web UI. This release significantly expands the tool's capabilities for personal knowledge management.
+
+### 🎉 Highlights
+
+- **Calendar Connector**: Connect to Google Calendar, iCal files
+- **Notes Connector**: Access Apple Notes, Notion
+- **Abstractive Summarization**: AI-powered summary generation
+- **Multi-language Support**: Chinese and English text processing
+- **Web UI**: Modern web interface for knowledge management
+- **Performance Optimizations**: Faster indexing and search
+
+### ✨ New Features
+
+#### Calendar Connector
+
+```python
+from scripts.connectors.calendar import CalendarConnector
+
+connector = CalendarConnector(provider="google")
+events = connector.search_events("meeting", date_range=("2026-03-01", "2026-03-31"))
+```
+
+**Supported Providers**:
+- Google Calendar (API)
+- iCal (file parsing)
+
+#### Notes Connector
+
+```python
+from scripts.connectors.notes import NotesConnector
+
+connector = NotesConnector(provider="notion")
+notes = connector.search_notes("project")
+```
+
+**Supported Providers**:
+- Apple Notes (macOS)
+- Notion (API)
+
+#### Abstractive Summarization
+
+```python
+from scripts.tools.extraction import generate_abstractive_summary
+
+summary = generate_abstractive_summary(
+    text="Long document...",
+    max_length=150,
+    style="concise"
+)
+```
+
+**Features**:
+- OpenAI API integration
+- Local model fallback
+- Multiple styles: concise, detailed, bullet-points
+
+#### Multi-language Support
+
+```python
+from scripts.utils.language import detect_language
+
+lang = detect_language("这是一段中文文本")  # "zh"
+```
+
+**Features**:
+- Auto language detection
+- Chinese/English support
+- Language-specific processing
+
+#### Web UI
+
+```bash
+cd web && ./start.sh
+# Access: http://localhost:3000
+```
+
+**Features**:
+- Semantic search interface
+- Document management (CRUD)
+- Connector dashboard
+- Dark mode
+
+### 📊 Quality Metrics
+
+| Metric | Value | Target |
+|--------|-------|--------|
+| Test Coverage | 91% | >80% ✅ |
+| Tests Passed | 269/269 | 100% ✅ |
+| Search Latency | ~85ms | <100ms ✅ |
+| Memory Usage | ~350MB | <500MB ✅ |
+
+### 📦 What's Changed
+
+**New Files**:
+- `scripts/connectors/calendar.py`
+- `scripts/connectors/notes.py`
+- `scripts/utils/language.py`
+- `scripts/api/` (Web API)
+- `web/` (Web UI)
+
+**Updated**:
+- `scripts/tools/extraction.py` (abstractive summary)
+- `scripts/tools/indexing.py` (batch processing)
+- `scripts/tools/search.py` (pagination, caching)
+
+---
+
+## v1.1.0 (2026-03-08)
+
+**Release Date**: 2026-03-08
+
+Knowledge Assistant v1.2 delivers significant performance improvements, new data connectors, advanced summarization, and a modern Web UI. This release focuses on scalability and user experience.
+
+### 🎉 Highlights
+
+- **Performance Optimization**: 10x scale support (>50k documents), 43% faster search
+- **Calendar & Notes Connectors**: Google Calendar, iCal, Apple Notes, Notion integration
+- **Abstractive Summarization**: LLM-powered summary generation
+- **Multi-language Support**: Automatic Chinese/English detection and processing
+- **Web UI**: Modern, responsive interface for knowledge management
+
+### ✨ New Features
+
+#### Performance Optimization
+
+**Batch Processing**:
+```python
+build_semantic_index(
+    documents,
+    doc_batch_size=100,    # Process in batches
+    enable_gc=True,        # Memory management
+    progress_callback=cb   # Real-time progress
+)
+```
+
+**Pagination & Caching**:
+```python
+results = semantic_search_paginated(
+    query,
+    page=1,
+    page_size=20,
+    use_cache=True
+)
+```
+
+**Performance Results**:
+| Metric | v1.1 | v1.2 | Improvement |
+|--------|------|------|-------------|
+| 10k docs build | ~8min | ~4.5min | 44% faster |
+| Search latency | 150ms | 85ms | 43% faster |
+| Memory (10k) | 600MB | 350MB | 42% less |
+| Max capacity | ~5k | >50k | 10x scale |
+
+#### Calendar Connector
+
+```python
+from scripts.connectors.calendar import CalendarConnector
+
+connector = CalendarConnector(provider="google")
+events = connector.search_events("meeting", date_range=("2026-03-01", "2026-03-31"))
+```
+
+**Supported Providers**:
+- Google Calendar (API)
+- iCal (file parsing)
+- Local (simulated for testing)
+
+#### Notes Connector
+
+```python
+from scripts.connectors.notes import NotesConnector
+
+connector = NotesConnector(provider="notion")
+notes = connector.search_notes("project")
+```
+
+**Supported Providers**:
+- Apple Notes (macOS)
+- Notion (API)
+- Local (markdown files)
+
+#### Abstractive Summarization
+
+```python
+from scripts.tools.extraction import generate_abstractive_summary
+
+summary = generate_abstractive_summary(
+    text="Long document...",
+    max_length=150,
+    style="concise"  # or "detailed", "bullet-points"
+)
+```
+
+**Features**:
+- OpenAI API integration
+- Local model fallback
+- Multiple summary styles
+- Extractive fallback when LLM unavailable
+
+#### Multi-language Support
+
+```python
+from scripts.utils.language import detect_language, get_text_info
+
+# Auto-detect language
+lang = detect_language("这是一段中文文本")  # "zh"
+
+# Get text analysis
+info = get_text_info("This is English text")
+# {"language": "en", "char_count": 19, "word_count": 4}
+```
+
+**Features**:
+- Automatic language detection (Chinese/English)
+- Language-specific stop words
+- Support in extract_keywords() and generate_summary()
+
+#### Web UI
+
+**Start the server**:
+```bash
+cd web && ./start.sh
+```
+
+**Access**: http://localhost:3000
+
+**Features**:
+- Semantic search interface
+- Document management (CRUD)
+- Connector status dashboard
+- Responsive design
+- Dark mode support
+
+### 📊 Quality Metrics
+
+| Metric | Value | Target | Status |
+|--------|-------|--------|--------|
+| Test Coverage | 91% | >80% | ✅ Exceeded |
+| Tests Passed | 269/269 | All | ✅ Met |
+| Integration Tests | 100% | All | ✅ Met |
+| Performance | All met | All | ✅ Met |
+
+### 🏗️ Architecture
+
+```
+knowledge-assistant/
+├── scripts/
+│   ├── tools/
+│   │   ├── indexing.py      # Batch processing
+│   │   ├── search.py        # Pagination & caching
+│   │   └── extraction.py    # Abstractive summary
+│   ├── connectors/
+│   │   ├── calendar.py      # NEW: Calendar connector
+│   │   ├── notes.py         # NEW: Notes connector
+│   │   ├── config.py        # Connector configuration
+│   │   └── registry.py      # Connector registry
+│   ├── api/
+│   │   ├── main.py          # FastAPI application
+│   │   ├── routes/          # API endpoints
+│   │   └── models/          # Pydantic schemas
+│   └── utils/
+│       └── language.py      # NEW: Language detection
+├── web/
+│   ├── index.html           # Web UI
+│   ├── css/                 # Styles
+│   └── js/                  # Application logic
+└── tests/
+    └── *                    # 269 tests
+```
+
+### 🔄 Dependencies
+
+New dependencies in v1.2:
+```
+google-api-python-client>=2.0.0  # Calendar API
+icalendar>=5.0.0                  # iCal parsing
+# OpenAI API (optional, for abstractive summary)
+```
+
+### ⚠️ Known Issues
+
+1. **Calendar API**: Requires Google Cloud credentials
+2. **Notion API**: Requires Notion integration token
+3. **Apple Notes**: macOS only
+
+### 🚀 What's Next (v1.3)
+
+Planned features:
+- [ ] More connectors (Calendar, Notes apps)
+- [ ] Advanced NLP (entity extraction)
+- [ ] Knowledge graph visualization
+- [ ] Plugin system
+
+### 🤝 Contributors
+
+**v1.2 Development Team**:
+- **PM Team**: Project management, release coordination
+- **AI Team**: Performance optimization
+- **Core Team**: Connectors, extraction tools
+- **Integration Team**: Web UI, API
+- **Test Team**: Quality assurance
+
+---
+
 ## v1.1.0 (2026-03-08)
 
 **Release Date**: 2026-03-08

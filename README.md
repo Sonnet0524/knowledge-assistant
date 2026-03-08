@@ -4,6 +4,15 @@ A personal knowledge management assistant with AI-powered semantic search, intel
 
 ## Features
 
+### v1.2 Features
+
+- **Calendar Connector** - Google Calendar and iCal integration
+- **Notes Connector** - Apple Notes and Notion integration
+- **Abstractive Summarization** - LLM-powered summary generation
+- **Multi-language Support** - Chinese and English text processing
+- **Web UI** - Modern web interface for knowledge management
+- **Performance Optimizations** - Faster indexing and search
+
 ### v1.1 Features
 
 - **Semantic Search** - AI-powered search that understands meaning, not just keywords
