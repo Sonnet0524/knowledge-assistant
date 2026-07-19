@@ -77,11 +77,7 @@ def ensure_directory(directory: Union[str, Path]) -> Path:
         >>> ensure_directory("notes/daily")
         >>> # Directory now exists
     """
-    dir_path = (
-        resolve_path(directory)
-        if not Path(directory).is_absolute()
-        else Path(directory)
-    )
+    dir_path = resolve_path(directory) if not Path(directory).is_absolute() else Path(directory)
     dir_path.mkdir(parents=True, exist_ok=True)
     return dir_path
 
@@ -107,11 +103,7 @@ def read_file(file_path: Union[str, Path], encoding: str = "utf-8") -> str:
         >>> content = read_file("notes/test.md")
         >>> print(content)
     """
-    path = (
-        resolve_path(file_path)
-        if not Path(file_path).is_absolute()
-        else Path(file_path)
-    )
+    path = resolve_path(file_path) if not Path(file_path).is_absolute() else Path(file_path)
 
     if not path.exists():
         raise FileNotFoundError(f"File not found: {path}")
@@ -147,11 +139,7 @@ def write_file(
     Example:
         >>> write_file("notes/test.md", "# Test\\nContent here")
     """
-    path = (
-        resolve_path(file_path)
-        if not Path(file_path).is_absolute()
-        else Path(file_path)
-    )
+    path = resolve_path(file_path) if not Path(file_path).is_absolute() else Path(file_path)
 
     if create_dirs:
         path.parent.mkdir(parents=True, exist_ok=True)

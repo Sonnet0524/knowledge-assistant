@@ -8,6 +8,7 @@ pytest-cov>=4.0.0
 black>=23.0.0
 flake8>=6.0.0
 mypy>=1.0.0
+types-PyYAML>=6.0.0  # Type stubs for mypy
 
 # Documentation
 # sphinx>=6.0.0  # Optional: for generating docs
