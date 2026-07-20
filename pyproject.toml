@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    {name = "Knowledge Assistant Team", email = "team@knowledge-assistant.dev"}
+    {name = "Sonnet.G", email = "sonnet.g@users.noreply.github.com"}
 ]
 keywords = ["knowledge-management", "personal-assistant", "opencode", "documentation"]
 classifiers = [
